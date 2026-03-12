@@ -20,63 +20,63 @@
 
 @layer base {
   :root {
-    /* Dark gothic theme — only dark mode */
-    --background: 0.1 0.005 280;
-    --foreground: 0.92 0.03 85;
+    /* KPop purple-pink dark theme */
+    --background: 0.12 0.04 290;
+    --foreground: 0.96 0.02 350;
 
-    --card: 0.14 0.01 270;
-    --card-foreground: 0.92 0.03 85;
+    --card: 0.16 0.05 290;
+    --card-foreground: 0.96 0.02 350;
 
-    --popover: 0.14 0.01 270;
-    --popover-foreground: 0.92 0.03 85;
+    --popover: 0.16 0.05 290;
+    --popover-foreground: 0.96 0.02 350;
 
-    /* Golden primary */
-    --primary: 0.74 0.14 80;
-    --primary-foreground: 0.1 0.005 280;
+    /* Hot pink primary */
+    --primary: 0.65 0.28 350;
+    --primary-foreground: 0.98 0 0;
 
-    --secondary: 0.2 0.015 270;
-    --secondary-foreground: 0.92 0.03 85;
+    --secondary: 0.22 0.06 280;
+    --secondary-foreground: 0.9 0.04 350;
 
-    --muted: 0.18 0.01 270;
-    --muted-foreground: 0.55 0.02 270;
+    --muted: 0.2 0.04 285;
+    --muted-foreground: 0.55 0.05 300;
 
-    --accent: 0.65 0.16 75;
-    --accent-foreground: 0.1 0.005 280;
+    --accent: 0.72 0.22 340;
+    --accent-foreground: 0.98 0 0;
 
     --destructive: 0.58 0.22 25;
     --destructive-foreground: 0.98 0 0;
 
-    --border: 0.25 0.03 270;
-    --input: 0.2 0.015 270;
-    --ring: 0.74 0.14 80;
+    --border: 0.28 0.07 300;
+    --input: 0.22 0.06 280;
+    --ring: 0.65 0.28 350;
 
     --radius: 0.5rem;
 
-    --chart-1: 0.74 0.14 80;
-    --chart-2: 0.65 0.16 75;
-    --chart-3: 0.55 0.12 70;
-    --chart-4: 0.45 0.1 65;
-    --chart-5: 0.35 0.08 60;
+    --chart-1: 0.65 0.28 350;
+    --chart-2: 0.7 0.2 300;
+    --chart-3: 0.75 0.18 200;
+    --chart-4: 0.78 0.2 80;
+    --chart-5: 0.6 0.24 270;
 
-    --sidebar: 0.12 0.008 270;
-    --sidebar-foreground: 0.92 0.03 85;
-    --sidebar-primary: 0.74 0.14 80;
-    --sidebar-primary-foreground: 0.1 0.005 280;
-    --sidebar-accent: 0.18 0.01 270;
-    --sidebar-accent-foreground: 0.92 0.03 85;
-    --sidebar-border: 0.22 0.02 270;
-    --sidebar-ring: 0.74 0.14 80;
+    --sidebar: 0.14 0.05 285;
+    --sidebar-foreground: 0.96 0.02 350;
+    --sidebar-primary: 0.65 0.28 350;
+    --sidebar-primary-foreground: 0.98 0 0;
+    --sidebar-accent: 0.2 0.05 285;
+    --sidebar-accent-foreground: 0.9 0.04 350;
+    --sidebar-border: 0.25 0.06 290;
+    --sidebar-ring: 0.65 0.28 350;
 
     /* Game-specific tokens */
-    --gold: 0.74 0.14 80;
-    --gold-bright: 0.82 0.16 82;
-    --gold-dim: 0.55 0.1 78;
-    --card-back: 0.12 0.015 270;
-    --card-face: 0.16 0.01 265;
-    --glow-gold: 0 0 24px oklch(0.74 0.14 80 / 0.5), 0 0 8px
-      oklch(0.74 0.14 80 / 0.3);
-    --glow-match: 0 0 32px oklch(0.74 0.14 80 / 0.8), 0 0 12px
-      oklch(0.74 0.14 80 / 0.6);
+    --gold: 0.78 0.18 80;
+    --gold-bright: 0.88 0.2 82;
+    --gold-dim: 0.6 0.14 78;
+    --card-back: 0.16 0.06 285;
+    --card-face: 0.18 0.05 280;
+    --glow-gold: 0 0 24px oklch(0.65 0.28 350 / 0.5), 0 0 8px
+      oklch(0.65 0.28 350 / 0.3);
+    --glow-match: 0 0 32px oklch(0.72 0.28 350 / 0.8), 0 0 12px
+      oklch(0.65 0.28 350 / 0.6);
   }
 }
 
@@ -107,8 +107,9 @@
   transform-style: preserve-3d;
 }
 
-.card-scene.flipped .card-inner,
-.card-scene.matched .card-inner {
+/* FIX: flipped/matched class is on .card-inner itself (the button) */
+.card-inner.flipped,
+.card-inner.matched {
   transform: rotateY(180deg);
 }
 
@@ -119,6 +120,8 @@
   -webkit-backface-visibility: hidden;
   border-radius: 0.5rem;
   overflow: hidden;
+  /* Prevent hidden faces from stealing pointer events */
+  pointer-events: none;
 }
 
 .card-back {
@@ -129,8 +132,8 @@
   transform: rotateY(180deg);
 }
 
-/* Gold shimmer animation */
-@keyframes gold-shimmer {
+/* Pink shimmer animation */
+@keyframes pink-shimmer {
   0% {
     background-position: -200% center;
   }
@@ -171,35 +174,40 @@
 .shimmer-text {
   background: linear-gradient(
     90deg,
-    oklch(0.74 0.14 80) 0%,
-    oklch(0.92 0.18 85) 40%,
-    oklch(0.74 0.14 80) 60%,
-    oklch(0.58 0.12 75) 100%
+    oklch(0.65 0.28 350) 0%,
+    oklch(0.88 0.2 320) 40%,
+    oklch(0.72 0.25 350) 60%,
+    oklch(0.75 0.2 280) 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gold-shimmer 3s linear infinite;
+  animation: pink-shimmer 3s linear infinite;
 }
 
-/* Pattern background */
+/* KPop gradient background — no grid */
 .gothic-bg {
-  background-image: radial-gradient(
-      ellipse at 20% 20%,
-      oklch(0.22 0.04 270 / 0.4) 0%,
-      transparent 60%
+  background: radial-gradient(
+      ellipse at 15% 20%,
+      oklch(0.3 0.18 300 / 0.55) 0%,
+      transparent 50%
     ),
     radial-gradient(
-      ellipse at 80% 80%,
-      oklch(0.2 0.03 265 / 0.3) 0%,
-      transparent 60%
+      ellipse at 85% 75%,
+      oklch(0.28 0.2 350 / 0.45) 0%,
+      transparent 50%
     ),
-    repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 40px,
-      oklch(0.15 0.01 270 / 0.15) 40px,
-      oklch(0.15 0.01 270 / 0.15) 41px
+    radial-gradient(
+      ellipse at 50% 50%,
+      oklch(0.18 0.08 270 / 0.6) 0%,
+      transparent 70%
+    ),
+    linear-gradient(
+      135deg,
+      oklch(0.12 0.06 290) 0%,
+      oklch(0.15 0.08 310) 45%,
+      oklch(0.13 0.07 330) 100%
     );
+  background-attachment: fixed;
 }

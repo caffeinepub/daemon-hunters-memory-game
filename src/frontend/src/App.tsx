@@ -8,8 +8,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Leaderboard } from "./components/Leaderboard";
 import { MemoryCard } from "./components/MemoryCard";
 import { WinDialog } from "./components/WinDialog";
-import { CARD_ICONS } from "./icons/DaemonHunterIcons";
-import { InquisitionSeal } from "./icons/DaemonHunterIcons";
+import { CARD_ICONS, InquisitionSeal } from "./icons/DaemonHunterIcons";
 
 const queryClient = new QueryClient();
 
@@ -175,21 +174,22 @@ function GameApp() {
         className="relative border-b px-4 py-3 flex items-center justify-between"
         style={{
           background:
-            "linear-gradient(180deg, oklch(0.1 0.015 270), oklch(0.12 0.012 270))",
-          borderColor: "oklch(0.74 0.14 80 / 0.3)",
+            "linear-gradient(180deg, oklch(0.14 0.08 285 / 0.95), oklch(0.16 0.07 295 / 0.95))",
+          borderColor: "oklch(0.65 0.28 350 / 0.3)",
+          backdropFilter: "blur(8px)",
         }}
       >
         {/* Left: logo */}
         <div className="flex items-center gap-3">
-          <div className="opacity-80">
+          <div className="opacity-90">
             <InquisitionSeal size={36} />
           </div>
           <div>
             <h1 className="font-display text-lg leading-tight shimmer-text">
               Daemon Hunters
             </h1>
-            <p className="text-xs" style={{ color: "oklch(0.45 0.04 270)" }}>
-              Memory Game
+            <p className="text-xs" style={{ color: "oklch(0.6 0.15 330)" }}>
+              KPop Memory Game
             </p>
           </div>
         </div>
@@ -198,30 +198,30 @@ function GameApp() {
         <div className="hidden sm:flex items-center gap-4">
           <div
             className="flex items-center gap-1.5 text-sm"
-            style={{ color: "oklch(0.74 0.14 80)" }}
+            style={{ color: "oklch(0.78 0.18 80)" }}
           >
             <Target className="w-4 h-4" />
             <span className="font-bold">{moves}</span>
-            <span style={{ color: "oklch(0.45 0.03 270)" }}>moves</span>
+            <span style={{ color: "oklch(0.5 0.08 310)" }}>moves</span>
           </div>
           <div
             className="w-px h-5"
-            style={{ background: "oklch(0.3 0.03 270)" }}
+            style={{ background: "oklch(0.35 0.1 310)" }}
           />
           <div
             className="flex items-center gap-1.5 text-sm"
-            style={{ color: "oklch(0.74 0.14 80)" }}
+            style={{ color: "oklch(0.78 0.18 80)" }}
           >
             <Clock className="w-4 h-4" />
             <span className="font-bold font-mono">{formatTime(timer)}</span>
           </div>
           <div
             className="w-px h-5"
-            style={{ background: "oklch(0.3 0.03 270)" }}
+            style={{ background: "oklch(0.35 0.1 310)" }}
           />
           <div
             className="flex items-center gap-1.5 text-sm"
-            style={{ color: "oklch(0.74 0.14 80)" }}
+            style={{ color: "oklch(0.78 0.18 80)" }}
           >
             <Trophy className="w-4 h-4" />
             <span className="font-bold">
@@ -238,8 +238,8 @@ function GameApp() {
           className="gap-2 font-display text-xs"
           style={{
             background:
-              "linear-gradient(135deg, oklch(0.55 0.12 80), oklch(0.65 0.14 82))",
-            color: "oklch(0.1 0.005 280)",
+              "linear-gradient(135deg, oklch(0.55 0.28 350), oklch(0.62 0.25 320))",
+            color: "white",
             border: "none",
           }}
         >
@@ -252,27 +252,27 @@ function GameApp() {
       <div
         className="sm:hidden flex items-center justify-around px-4 py-2 border-b text-sm"
         style={{
-          background: "oklch(0.1 0.01 270)",
-          borderColor: "oklch(0.74 0.14 80 / 0.15)",
+          background: "oklch(0.14 0.06 285 / 0.9)",
+          borderColor: "oklch(0.65 0.28 350 / 0.15)",
         }}
       >
         <div
           className="flex items-center gap-1"
-          style={{ color: "oklch(0.74 0.14 80)" }}
+          style={{ color: "oklch(0.78 0.18 80)" }}
         >
           <Target className="w-3.5 h-3.5" />
           <span className="font-bold">{moves}</span>
         </div>
         <div
           className="flex items-center gap-1"
-          style={{ color: "oklch(0.74 0.14 80)" }}
+          style={{ color: "oklch(0.78 0.18 80)" }}
         >
           <Clock className="w-3.5 h-3.5" />
           <span className="font-mono font-bold">{formatTime(timer)}</span>
         </div>
         <div
           className="flex items-center gap-1"
-          style={{ color: "oklch(0.74 0.14 80)" }}
+          style={{ color: "oklch(0.78 0.18 80)" }}
         >
           <Trophy className="w-3.5 h-3.5" />
           <span className="font-bold">
@@ -297,16 +297,13 @@ function GameApp() {
                   style={{
                     background:
                       difficulty === d
-                        ? "linear-gradient(135deg, oklch(0.55 0.12 80), oklch(0.65 0.14 82))"
-                        : "oklch(0.15 0.01 270)",
-                    color:
-                      difficulty === d
-                        ? "oklch(0.1 0.005 280)"
-                        : "oklch(0.55 0.04 270)",
+                        ? "linear-gradient(135deg, oklch(0.55 0.28 350), oklch(0.62 0.25 320))"
+                        : "oklch(0.18 0.06 285)",
+                    color: difficulty === d ? "white" : "oklch(0.6 0.1 310)",
                     border:
                       difficulty === d
-                        ? "1px solid oklch(0.74 0.14 80)"
-                        : "1px solid oklch(0.22 0.02 270)",
+                        ? "1px solid oklch(0.65 0.28 350)"
+                        : "1px solid oklch(0.28 0.07 300)",
                     fontWeight: difficulty === d ? 700 : 400,
                   }}
                 >
@@ -322,12 +319,16 @@ function GameApp() {
               className="flex items-center gap-1.5 px-3 py-1.5 rounded text-sm transition-all lg:hidden"
               style={{
                 background: showLeaderboard
-                  ? "oklch(0.18 0.04 80 / 0.4)"
-                  : "oklch(0.15 0.01 270)",
+                  ? "oklch(0.22 0.1 310 / 0.5)"
+                  : "oklch(0.18 0.06 285)",
                 color: showLeaderboard
-                  ? "oklch(0.82 0.16 82)"
-                  : "oklch(0.55 0.04 270)",
-                border: `1px solid ${showLeaderboard ? "oklch(0.74 0.14 80 / 0.5)" : "oklch(0.22 0.02 270)"}`,
+                  ? "oklch(0.8 0.2 350)"
+                  : "oklch(0.6 0.1 310)",
+                border: `1px solid ${
+                  showLeaderboard
+                    ? "oklch(0.65 0.28 350 / 0.5)"
+                    : "oklch(0.28 0.07 300)"
+                }`,
               }}
             >
               <Trophy className="w-3.5 h-3.5" />
@@ -347,13 +348,13 @@ function GameApp() {
                 <div
                   className="rounded-xl p-4"
                   style={{
-                    background: "oklch(0.12 0.012 270)",
-                    border: "1px solid oklch(0.74 0.14 80 / 0.2)",
+                    background: "oklch(0.16 0.07 285 / 0.9)",
+                    border: "1px solid oklch(0.65 0.28 350 / 0.2)",
                   }}
                 >
                   <h3
                     className="font-display text-sm mb-3"
-                    style={{ color: "oklch(0.74 0.14 80)" }}
+                    style={{ color: "oklch(0.8 0.2 350)" }}
                   >
                     Hall of Heroes — {DIFFICULTY_CONFIG[difficulty].label}
                   </h3>
@@ -384,13 +385,13 @@ function GameApp() {
           {/* Progress bar */}
           <div
             className="h-1.5 rounded-full overflow-hidden"
-            style={{ background: "oklch(0.16 0.01 270)" }}
+            style={{ background: "oklch(0.2 0.05 285)" }}
           >
             <motion.div
               className="h-full rounded-full"
               style={{
                 background:
-                  "linear-gradient(90deg, oklch(0.55 0.12 80), oklch(0.82 0.16 82))",
+                  "linear-gradient(90deg, oklch(0.55 0.28 350), oklch(0.72 0.22 320))",
               }}
               animate={{ width: `${(matchedCount / totalPairs) * 100}%` }}
               transition={{ duration: 0.5, ease: "easeOut" }}
@@ -402,18 +403,19 @@ function GameApp() {
         <div
           className="hidden lg:flex flex-col w-72 rounded-xl p-4 self-start"
           style={{
-            background: "oklch(0.12 0.012 270)",
-            border: "1px solid oklch(0.74 0.14 80 / 0.2)",
+            background: "oklch(0.16 0.07 285 / 0.85)",
+            border: "1px solid oklch(0.65 0.28 350 / 0.2)",
+            backdropFilter: "blur(8px)",
           }}
         >
           <div className="flex items-center gap-2 mb-4">
             <Trophy
               className="w-4 h-4"
-              style={{ color: "oklch(0.74 0.14 80)" }}
+              style={{ color: "oklch(0.8 0.2 350)" }}
             />
             <h3
               className="font-display text-sm"
-              style={{ color: "oklch(0.74 0.14 80)" }}
+              style={{ color: "oklch(0.8 0.2 350)" }}
             >
               Hall of Heroes
             </h3>
@@ -428,13 +430,17 @@ function GameApp() {
                 style={{
                   background:
                     difficulty === d
-                      ? "oklch(0.18 0.04 80 / 0.5)"
+                      ? "oklch(0.22 0.1 310 / 0.6)"
                       : "transparent",
                   color:
                     difficulty === d
-                      ? "oklch(0.82 0.16 82)"
-                      : "oklch(0.45 0.03 270)",
-                  border: `1px solid ${difficulty === d ? "oklch(0.74 0.14 80 / 0.4)" : "oklch(0.2 0.01 270)"}`,
+                      ? "oklch(0.82 0.2 350)"
+                      : "oklch(0.5 0.08 310)",
+                  border: `1px solid ${
+                    difficulty === d
+                      ? "oklch(0.65 0.28 350 / 0.4)"
+                      : "oklch(0.25 0.06 290)"
+                  }`,
                 }}
               >
                 {DIFFICULTY_CONFIG[d].label}
@@ -449,9 +455,9 @@ function GameApp() {
       <footer
         className="text-center py-3 text-xs border-t"
         style={{
-          color: "oklch(0.35 0.02 270)",
-          borderColor: "oklch(0.2 0.02 270)",
-          background: "oklch(0.1 0.008 270)",
+          color: "oklch(0.45 0.08 310)",
+          borderColor: "oklch(0.25 0.07 300)",
+          background: "oklch(0.13 0.05 285 / 0.9)",
         }}
       >
         © {new Date().getFullYear()}. Built with ♥ using{" "}
@@ -459,7 +465,7 @@ function GameApp() {
           href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
           target="_blank"
           rel="noopener noreferrer"
-          style={{ color: "oklch(0.55 0.08 80)" }}
+          style={{ color: "oklch(0.65 0.22 350)" }}
         >
           caffeine.ai
         </a>
