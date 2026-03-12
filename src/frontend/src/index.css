@@ -1,0 +1,205 @@
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("/assets/fonts/PlayfairDisplay.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "General Sans";
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url("/assets/fonts/GeneralSans.woff2") format("woff2");
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark gothic theme — only dark mode */
+    --background: 0.1 0.005 280;
+    --foreground: 0.92 0.03 85;
+
+    --card: 0.14 0.01 270;
+    --card-foreground: 0.92 0.03 85;
+
+    --popover: 0.14 0.01 270;
+    --popover-foreground: 0.92 0.03 85;
+
+    /* Golden primary */
+    --primary: 0.74 0.14 80;
+    --primary-foreground: 0.1 0.005 280;
+
+    --secondary: 0.2 0.015 270;
+    --secondary-foreground: 0.92 0.03 85;
+
+    --muted: 0.18 0.01 270;
+    --muted-foreground: 0.55 0.02 270;
+
+    --accent: 0.65 0.16 75;
+    --accent-foreground: 0.1 0.005 280;
+
+    --destructive: 0.58 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.25 0.03 270;
+    --input: 0.2 0.015 270;
+    --ring: 0.74 0.14 80;
+
+    --radius: 0.5rem;
+
+    --chart-1: 0.74 0.14 80;
+    --chart-2: 0.65 0.16 75;
+    --chart-3: 0.55 0.12 70;
+    --chart-4: 0.45 0.1 65;
+    --chart-5: 0.35 0.08 60;
+
+    --sidebar: 0.12 0.008 270;
+    --sidebar-foreground: 0.92 0.03 85;
+    --sidebar-primary: 0.74 0.14 80;
+    --sidebar-primary-foreground: 0.1 0.005 280;
+    --sidebar-accent: 0.18 0.01 270;
+    --sidebar-accent-foreground: 0.92 0.03 85;
+    --sidebar-border: 0.22 0.02 270;
+    --sidebar-ring: 0.74 0.14 80;
+
+    /* Game-specific tokens */
+    --gold: 0.74 0.14 80;
+    --gold-bright: 0.82 0.16 82;
+    --gold-dim: 0.55 0.1 78;
+    --card-back: 0.12 0.015 270;
+    --card-face: 0.16 0.01 265;
+    --glow-gold: 0 0 24px oklch(0.74 0.14 80 / 0.5), 0 0 8px
+      oklch(0.74 0.14 80 / 0.3);
+    --glow-match: 0 0 32px oklch(0.74 0.14 80 / 0.8), 0 0 12px
+      oklch(0.74 0.14 80 / 0.6);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "General Sans", sans-serif;
+    min-height: 100dvh;
+  }
+}
+
+/* 3D Card flip */
+.card-scene {
+  perspective: 900px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.card-scene.flipped .card-inner,
+.card-scene.matched .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.card-back {
+  /* front face (shown by default) */
+}
+
+.card-front {
+  transform: rotateY(180deg);
+}
+
+/* Gold shimmer animation */
+@keyframes gold-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes float-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: var(--glow-gold);
+  }
+  50% {
+    box-shadow: var(--glow-match);
+  }
+}
+
+.animate-float-in {
+  animation: float-in 0.5s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 1.8s ease-in-out infinite;
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    oklch(0.74 0.14 80) 0%,
+    oklch(0.92 0.18 85) 40%,
+    oklch(0.74 0.14 80) 60%,
+    oklch(0.58 0.12 75) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gold-shimmer 3s linear infinite;
+}
+
+/* Pattern background */
+.gothic-bg {
+  background-image: radial-gradient(
+      ellipse at 20% 20%,
+      oklch(0.22 0.04 270 / 0.4) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 80% 80%,
+      oklch(0.2 0.03 265 / 0.3) 0%,
+      transparent 60%
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      oklch(0.15 0.01 270 / 0.15) 40px,
+      oklch(0.15 0.01 270 / 0.15) 41px
+    );
+}
